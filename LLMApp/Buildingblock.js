@@ -1,44 +1,12 @@
-import "dotenv/config";
+import { Document } from "lanchain/document";
+import { CharactertextSpitter } from "lanchain/text_spiltter";
 
-import { chatOpenAi } from "@langchain/openai";
-import { HumanMessage } from "@langchain/core/message";
-import { ChatPromptTemplate } from "@langchain/core/prompts";
-import {
-    SystemMessagePromptTemplate,
-    HumanMessagePomptTemplate
-} from "@langchain/core/prompts";
+const text = "foo bar baz 1243";
 
-const promptFromMessages = ChatPromptTempelate.formMessage([
-    ["system", "you are an exper at picking company names."],
-    ["human", "What are three good names for a company that make {product}?"]
-]);
-
-await promptFromMessages.formatMessage({
-    product: "Shinny objects"
+const splitter  =  new CharacterTextSplitter({
+    seperator: ", "
+    chunkSize: 7,
+    chunkOverlap: 3,
 });
 
-const chain = prompt.pipe(model);
-
-await chain.invoke({
-    prodct: "colorfull socks"
-});
-
-const prompt = ChatPromptTemplate.fromTemplate(
-    `What are three good name for a company that makes {product}?`
-)
-
-await prompt.format({
-    product: "colorful socks"
-});
-
-await prompt.formatMessage({
-    product: "colorful socks"
-});
-
-const model =new chatOpenAi({
-    modelName: "gpt-3.5 turbo-1106"
-});
-
-await model.invoke([
-    new HumanMessage("Tell me a joke")
-]);
+const oputput = await splitter.createDocuments([text]);
