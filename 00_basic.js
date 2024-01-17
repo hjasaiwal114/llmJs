@@ -36,4 +36,4 @@ const prompt = promptTempelate.replace("{question}", question);
 
 chat(prompt)
     .then((response) => console.log(response))
-    .catch((error) => console.log(error));
+    .catch((error) => console.log(error)); 
